@@ -1,7 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import {
+  Link as LinkReactDOM,
+  LinkProps as LinkPropsReactDOM,
+} from 'react-router-dom';
 
 interface ContainerProps {
   size?: 'small' | 'large';
+}
+
+interface LinkProps extends LinkPropsReactDOM {
+  active: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -17,20 +25,28 @@ export const Container = styled.div<ContainerProps>`
     justify-content: space-between;
 
     nav {
-      a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        transition: opacity 0.2s;
-
-        & + a {
-          margin-left: 32px;
-        }
-
-        &:hover {
-          opacity: 0.6;
-        }
-      }
     }
   }
+`;
+
+export const Link = styled(LinkReactDOM)<LinkProps>`
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s;
+
+  & + a {
+    margin-left: 32px;
+  }
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  ${props =>
+    props.active &&
+    css`
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ff872c;
+    `}
 `;
