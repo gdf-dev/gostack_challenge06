@@ -41,14 +41,18 @@ const Dashboard: React.FC = () => {
 
       const formattedValues = transactionsData.map(
         (transaction: Transaction) => {
-          const signedNumber =
-            transaction.type === 'outcome'
-              ? -Math.abs(transaction.value)
-              : transaction.value;
+          // const signedNumber =
+          //   transaction.type === 'outcome'
+          //     // ? -Math.abs(transaction.value)
+          //     : transaction.value;
 
           return {
             ...transaction,
-            formattedValue: formatValue(signedNumber),
+            // formattedValue: formatValue(signedNumber),
+            formattedValue:
+              transaction.type === 'outcome'
+                ? `- ${formatValue(transaction.value)}`
+                : formatValue(transaction.value),
             formattedDate: new Date(transaction.created_at).toLocaleDateString(
               'pt-BR',
             ),
